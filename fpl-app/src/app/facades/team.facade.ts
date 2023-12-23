@@ -1,10 +1,11 @@
-import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { Team } from '../models/team.model';
+import { Team } from "../models/team.model";
 import { TeamRepository } from '../repositories/team.repository';
 
-@Injectable({
-  providedIn: 'root',
-})
 export class TeamFacade {
+  private teamRepository: TeamRepository = new TeamRepository();
+
+  async getTeamByCode(teamCode: number): Promise<Team | null> {
+    return this.teamRepository.getTeamByCode(teamCode);
+  }
+
 }

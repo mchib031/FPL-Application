@@ -1,15 +1,15 @@
-import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { Player } from '../models/player.model';
-import { PlayerRepository } from '../repositories/player.repository';
+import { Player } from "../models/player.model";
+import { PlayerRepository } from "../repositories/player.repository";
 
-@Injectable({
-  providedIn: 'root',
-})
 export class PlayerFacade {
-  constructor(private playerRepository: PlayerRepository) {}
+  private playerRepository: PlayerRepository = new PlayerRepository();
 
-  getPlayerInfo(gameweekId: number): Observable<Player[]> {
-    return this.playerRepository.getPlayerInfo(gameweekId);
+  async getPlayerByCode(playerCode: number): Promise<Player | null> {
+    return this.playerRepository.getPlayerByCode(playerCode);
   }
+
+  async getLivePlayerStatsByGameweek(gameweekId: number): Promise<Player[] | null> {
+    return this.playerRepository.getLivePlayerStatsByGameweek(gameweekId);
+  }
+
 }

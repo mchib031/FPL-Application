@@ -1,16 +1,15 @@
-import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { UserRepository } from '../repositories/user.repository';
-import { User } from '../models/user.model';
+import { User } from "../models/user.model";
+import { UserRepository } from "../repositories/user.repository";
 
-@Injectable({
-  providedIn: 'root',
-})
 export class UserFacade {
-  constructor(private userRepository: UserRepository) {}
+  private userRepository: UserRepository = new UserRepository();
 
-  getUserInfo(userId: number): Observable<User> {
-    return this.userRepository.getUserInfo(userId);
+  async getUserById(userId: number): Promise<User | null> {
+    return this.userRepository.getUserById(userId);
+  }
+
+  async getUserLeagues(userId: number): Promise<any> {
+    return this.userRepository.getUserLeagues(userId);
   }
 
 }

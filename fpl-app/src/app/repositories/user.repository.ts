@@ -1,19 +1,28 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import axios from 'axios';
 import { User } from '../models/user.model';
 
-@Injectable({
-  providedIn: 'root',
-})
 export class UserRepository {
-  private baseUrl = 'https://fantasy.premierleague.com/api';
+  private baseUrl: string = 'https://fantasy.premierleague.com/api/element-summary';
 
-  constructor(private http: HttpClient) {}
+  async getUserById(userId: number): Promise<User | null> {
+    try {
+      const response = await axios.get(`${this.baseUrl}/user-id/${userId}`);
+      return response.data;
+    } catch (error) {
+      console.error('Error fetching user:', error);
+      return null;
+    }
+  }
 
-  getUserInfo(userId: number): Observable<User> {
-    const url = `${this.baseUrl}/element-summary/${userId}/`;
-    return this.http.get<User>(url);
+  async getUserLeagues(userId: number) {
+    const response = await axios.get(`${this.baseUrl}/user-id/${userId}`);
+    const user = response.data;
+
+    if (user && user.leagues) {
+      return user.leagues;
+    }
+
+    return null;
   }
 
 }
