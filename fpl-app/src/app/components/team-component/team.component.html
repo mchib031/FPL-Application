@@ -1,22 +1,7 @@
-<div style="text-align: center;">
-  <h2>Team View</h2>
-
-  <div>
-    <button (click)="viewMode = 'pitch'" [disabled]="viewMode === 'pitch'">Pitch View</button>
-    <button (click)="viewMode = 'list'" [disabled]="viewMode === 'list'">List View</button>
-  </div>
-
-  <div *ngIf="viewMode === 'pitch'" class="soccer-field">
-    <div class="goal-net"></div>
-    <div class="player" *ngFor="let player of players" [ngStyle]="player.position">
-      {{ player.name }}
-    </div>
-  </div>
-
-  <div *ngIf="viewMode === 'list'" class="player-list">
-    <h3>Player List</h3>
-    <ul>
-      <li *ngFor="let player of players">{{ player.name }}</li>
-    </ul>
-  </div>
+<div *ngFor="let team of teamData">
+  <img [src]="team.badge" alt="Team Badge">
+  <h2>{{ team.name }}</h2>
+  <p>Wins: {{ team.win }}</p>
+  <p>Draws: {{ team.draw }}</p>
+  <p>Losses: {{ team.loss }}</p>
 </div>

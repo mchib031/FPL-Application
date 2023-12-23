@@ -3,6 +3,7 @@ export interface Team {
     draw: number;
     form: string | null;
     id: number;
+    badge: string | null;
     loss: number;
     name: string;
     played: number;
